@@ -22,5 +22,4 @@ cd $DestinationPath
 
 if ($ToPackFiles) { $ToPackFiles | & $7zip a -mx9 ("$BackupPath\"+(Get-Date -Format "yyyy-MM-dd_HHmmss")+".7z") }
 
-Copy-Item "$SourcePath\*" -Recurse $DestinationPath -Force -PassThru | foreach { Write-Host $_.F
-ullName }
+Copy-Item "$SourcePath\*" -Recurse $DestinationPath -Force -PassThru | foreach { Write-Host $_.FullName }
