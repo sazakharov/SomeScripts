@@ -10,13 +10,13 @@ $SourcePath="C:\Some\Source\Path"
 $DestinationPath="C:\Some\Destionation\Path"
 $7zip="C:\Program Files\7-Zip\7z.exe"
 
-$SourceFiles = ( Get-ChildItem $SourcePath -Recurse | where {$_.Mode -notlike 'd*'} | foreach {$_.FullName.Replace("$SourcePath\","") } )
+$SourceFiles = ( Get-ChildItem $SourcePath -Recurse -Force | where {$_.Mode -notlike 'd*'} | foreach {$_.FullName.Replace("$SourcePath\","") } )
 
-$DestinationFiles = ( Get-ChildItem $DestinationPath -Recurse | where {$_.Mode -notlike 'd*'} | foreach {$_.FullName.Replace("$DestinationPath\","") } )
+$DestinationFiles = ( Get-ChildItem $DestinationPath -Recurse -Force | where {$_.Mode -notlike 'd*'} | foreach {$_.FullName.Replace("$DestinationPath\","") } )
 
 $ToPackFiles = @()
 
-$SourceFiles | foreach { if ($DestinationFiles -match "^"+ $_.Replace("\","\\") +"$") { $ToPackFiles += $_ } }
+$SourceFiles | foreach { if ($DestinationFiles -match "^"+ $_.Replace("\","\\") +"$") { $ToPackFiles += "'$_'" } }
 
 cd $DestinationPath
 
